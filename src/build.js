@@ -13,7 +13,7 @@ function buildStorybook(currentPackage, outputDirectory, npmScriptName) {
   shell.mkdir(outputDirectory);
 
   if (currentPackage.scripts[npmScriptName]) {
-    publishUtils.exec(`pnpm run ${npmScriptName} -- -o ${outputDirectory}`);
+    publishUtils.exec(`pnpm --filter ${currentPackage.name} run ${npmScriptName} -o ${outputDirectory}`);
   } else {
     publishUtils.exec(`build-storybook  -o ${outputDirectory}`);
   }
