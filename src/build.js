@@ -13,7 +13,7 @@ function buildStorybook(currentPackage, outputDirectory, npmScriptName) {
   shell.mkdir(outputDirectory);
 
   if (currentPackage.scripts[npmScriptName]) {
-    publishUtils.exec(`pnpm --filter ${currentPackage.name} run ${npmScriptName} -o ${outputDirectory}`);
+    publishUtils.exec(`npm run ${npmScriptName} -o ${outputDirectory}`);
   } else {
     publishUtils.exec(`build-storybook  -o ${outputDirectory}`);
   }
@@ -25,19 +25,6 @@ function buildSubPackage(origDir, dir, outputDirectory, npmScriptName) {
   if (!fs.existsSync('package.json')) {
     return;
   }
-
-  const subPackage = JSON.parse(
-    fs.readFileSync(path.resolve('package.json'), 'utf8')
-  );
-
-  if (
-    !fs.existsSync('.storybook') &&
-    (!subPackage.scripts || !subPackage.scripts[npmScriptName])
-  ) {
-    return;
-  }
-
-  buildStorybook(subPackage, outputDirectory, npmScriptName);
 
   const builtStorybook = path.join(dir, outputDirectory, '*');
   const outputPath = path.join(origDir, outputDirectory, subPackage.name);
@@ -64,6 +51,7 @@ module.exports = function(
   if (packagesDirectory) {
     const origDir = process.cwd();
 
+    shell.exec(`pnpm nx:build-storybook -- -o ${outputDirectory}`)
     const packages = glob
       .sync(path.join(origDir, packagesDirectory, '**/package.json'), {
         ignore: '**/node_modules/**'
