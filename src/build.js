@@ -26,6 +26,10 @@ function buildSubPackage(origDir, dir, outputDirectory, npmScriptName) {
     return;
   }
 
+  const subPackage = JSON.parse(
+    fs.readFileSync(path.resolve('package.json'), 'utf8')
+  );
+
   const builtStorybook = path.join(dir, outputDirectory, '*');
   const outputPath = path.join(origDir, outputDirectory, subPackage.name);
 
