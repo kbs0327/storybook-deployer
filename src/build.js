@@ -30,6 +30,13 @@ function buildSubPackage(origDir, dir, outputDirectory, npmScriptName) {
     fs.readFileSync(path.resolve('package.json'), 'utf8')
   );
 
+  if (
+    !fs.existsSync('.storybook') &&
+    (!subPackage.scripts || !subPackage.scripts[npmScriptName])
+  ) {
+    return;
+  }
+
   const builtStorybook = path.join(dir, outputDirectory, '*');
   const outputPath = path.join(origDir, outputDirectory, subPackage.name);
 
