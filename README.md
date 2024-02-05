@@ -26,6 +26,7 @@ Options:
                                   at all instead of "default".       [string] [default: "default"]
   --bucket-path                   AWS bucket path to use for publishing                   [string]
   --s3-sync-options               Additional options to pass to AWSCLI s3 sync            [string]
+  --parallel                      Parallel job count                                          [number]
 ```
 
 ## Getting Started

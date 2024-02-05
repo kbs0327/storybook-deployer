@@ -27,7 +27,8 @@ build(
   packageJson,
   args.PACKAGES_DIRECTORY,
   args.NPM_SCRIPT,
-  args.MONOREPO_INDEX_GENERATOR
+  args.MONOREPO_INDEX_GENERATOR,
+  args.PARALLEL
 );
 
 if (args.DRY_RUN) {

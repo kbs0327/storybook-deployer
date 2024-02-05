@@ -53,7 +53,8 @@ module.exports = function(
   packageJson,
   packagesDirectory,
   npmScriptName,
-  monorepoIndexGenerator
+  monorepoIndexGenerator,
+  parallelCount
 ) {
   if (skipBuild) {
     return;
@@ -62,7 +63,7 @@ module.exports = function(
   if (packagesDirectory) {
     const origDir = process.cwd();
 
-    shell.exec(`pnpm nx:build-storybook -- -o ${outputDirectory}`)
+    shell.exec(`pnpm nx:build-storybook -- -o ${outputDirectory} --parallel=${parallelCount}`)
     const packages = glob
       .sync(path.join(origDir, packagesDirectory, '**/package.json'), {
         ignore: '**/node_modules/**'

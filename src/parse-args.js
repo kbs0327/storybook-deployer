@@ -85,6 +85,10 @@ const { argv } = yargs
   .option('s3-sync-options', {
     desc: 'Additional options to pass to AWSCLI s3 sync',
     type: 'string'
+  })
+  .option('parallel', {
+    desc: 'Parallel job count',
+    type: 'number'
   });
 
 module.exports = packageJson => {
@@ -114,6 +118,7 @@ module.exports = packageJson => {
     // AWS Variables
     AWS_PROFILE: argv['aws-profile'] || 'default',
     BUCKET_PATH: argv['bucket-path'],
+    PARALLEL: argv['parallel'] || 1,
     S3_PATH: 's3://' + argv['bucket-path'],
     S3_SYNC_OPTIONS: argv['s3-sync-options']
   };
