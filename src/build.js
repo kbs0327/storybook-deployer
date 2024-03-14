@@ -63,7 +63,7 @@ module.exports = function(
   if (packagesDirectory) {
     const origDir = process.cwd();
 
-    publishUtils.exec(`nx run-many -t build-storybook --parallel=${parallelCount} --nxBail=true -- -o ${outputDirectory}`);
+    publishUtils.exec(`nx run-many -t build-storybook --parallel=${parallelCount} --nxBail=true -- -o ${outputDirectory}`, false);
     const packages = glob
       .sync(path.join(origDir, packagesDirectory, '**/package.json'), {
         ignore: '**/node_modules/**'
