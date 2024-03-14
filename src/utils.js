@@ -1,10 +1,10 @@
 const shell = require('shelljs');
 const parseGitUrl = require('git-url-parse');
 
-module.exports.exec = function exec(command) {
+module.exports.exec = function exec(command, silent = true) {
   console.log(`   executing: ${command}`);
 
-  const options = { silent: true };
+  const options = { silent };
   const ref = shell.exec(command, options);
 
   if (ref.code === 0) {
